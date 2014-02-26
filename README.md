@@ -16,7 +16,7 @@ Une base de donnée mongodb, avec le server mongod en fonctionnement
 Les librairies suivantes sont supposées présentes sur la machine exécutant le programme
 
 string
-pymong
+pymongo (http://docs.mongodb.org/manual/core/indexes/)
 math
 numpy
 sklearn (instalable avec pip en recherchant scikit-learn, ne pas confondre avec scikit-learns)
