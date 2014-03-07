@@ -22,4 +22,7 @@ numpy
 sklearn (instalable avec pip en recherchant scikit-learn, ne pas confondre avec scikit-learns)
 la classe de Niniane Wang pour les calculs de Tf-idf (tfidf.py)
 
- 
+Interface Utilisateur
+=====
+Sur base d'article, choisir les articles qu'on apprécie, puis au fil du temps le programme vous recommande des articles similaires
+Les articles choisi comme interessants fond alors objet de base de recommandation pour d'autres articles.
