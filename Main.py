@@ -8,7 +8,7 @@ import math
 import wikipedia
 from textblob import TextBlob as tb
 import Model as md
-from TfIdf import TfIdf as tf
+#from TfIdf import TfIdf as tf
 
 stop_words=["le","la","les","un","une","de","des","en","du","l'","mais","ou","et","donc","or","ni","car","ces","ce","sa","mon","ton","son","leur","leurs","je","tu","il","elle","on","nous","vous","ils","elles"
             ,"mes","tes","nos","vos",
@@ -49,17 +49,19 @@ titles = wikipedia.random(pages=10)
 
 def page(titles):
     db = []
-    for i in titles:
+    for i in range(len(titles)):
         try :
-            db.append(wikipedia.WikipediaPage(i))
-        except wikipedia.exceptions.DisambiguationError as inst:
+            db.append(wikipedia.WikipediaPage(titles[i]))
+        except wikipedia.exceptions.DisambiguationError :
             #print type(inst)
             #print inst.args
             #print inst
             #x, y = inst.args
             #print 'x = ' , x
             #print 'y = ' , y
-            db.append(wikipedia.WikipediaPage(inst.options[1]))
+            #db.append(wikipedia.WikipediaPage(inst.options[1]))
+            titles[i] = wikipedia.random(pages=1)
+            page(titles)
     return db
         
 pages = page(titles)
@@ -77,10 +79,7 @@ contents = [i.content for i in pages]
 
 bloblist = [tb(i) for i in contents]
 #bloblist=[]
-<<<<<<< HEAD
 
-=======
->>>>>>> 2809433c3dd993c83310f60f48c341736f115962
 
 def scalaire(x,y):
     sum = 0.0
@@ -118,10 +117,9 @@ def recommandation(x,l):
 score = []
 
 #mod = md.Model()
-<<<<<<< HEAD
-=======
-rf = tf(contents, [])
->>>>>>> 2809433c3dd993c83310f60f48c341736f115962
+
+#rf = tf(contents, [])
+
 
 for i, blob in enumerate(bloblist):
     print("Top words in document {}".format(i + 1))

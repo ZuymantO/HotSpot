@@ -2,7 +2,7 @@
 # -*- coding: utf-8 -*-
 
 import wikipedia as wiki
-#import TfIdf as tf
+import TfIdf as tf
 from pymongo import MongoClient
 
 class Article:

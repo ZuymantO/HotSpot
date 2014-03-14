@@ -8,9 +8,12 @@ import math
 import wikipedia
 from textblob import TextBlob as tb
 import Model as md
+#from TfIdf import TfIdf as tf
 
 stop_words=["le","la","les","un","une","de","des","en","du","l'","mais","ou","et","donc","or","ni","car","ces","ce","sa","mon","ton","son","leur","leurs","je","tu","il","elle","on","nous","vous","ils","elles"
-            ,"mes","tes","nos","vos"]
+            ,"mes","tes","nos","vos",
+            "Le","La","Les","Un","Une","De","Des","En","Du","L'","Mais","Ou","Et","Donc","Or","Ni","Car","Ces","Ce","Sa","Mon","Ton","Son","Leur","Leurs","Je","Tu","Il","Elle","On","Nous","Vous","Ils","Elles"
+            ,"Mes","Tes","Nos","Vos"]
 
 def tf(word, blob):
     x = blob.words.count(word)
@@ -112,6 +115,9 @@ def recommandation(x,l):
 score = []
 
 #mod = md.Model()
+
+#rf = tf(contents, [])
+
 
 for i, blob in enumerate(bloblist):
     print("Top words in document {}".format(i + 1))
