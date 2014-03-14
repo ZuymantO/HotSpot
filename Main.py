@@ -4,7 +4,7 @@
 #import pymongo
 import string
 import math
-import tfidf
+#import tfidf
 import wikipedia
 from textblob import TextBlob as tb
 
@@ -62,22 +62,66 @@ contents = [i.content for i in pages]
 #for i in contents:
 #    print i
 #    print "-----------------------------\n\n\n\n"
+#print contents[0]
+#clear_content = [i.capitalize for i in contents]
+#print clear_content[0]
 
 bloblist = [tb(i) for i in contents]
-
 #bloblist=[]
 
+def scalaire(x,y):
+    sum = 0.0
+    for i in x:
+        sum = sum + x[i]*y[i]
+    return sum
+
+
+def cosinus(x,y):
+    for i in x.keys():
+        if i in y:
+            continue
+        else:
+            y[i]=0.0
+    for i in y.keys():
+        if i in x:
+            continue
+        else:
+            x[i]=0.0
+    scal = scalaire(x,y)
+    scalx = scalaire(x,x)
+    scaly = scalaire(y,y)
+    res = scal/(scalx*scaly)
+    return res
+    
+def recommandation(x,l):
+    res = []
+    for i in l:
+        if cosinus(x,i)<0.5:
+            continue
+        else:
+            res.append(i)
+    return res
+
+score = []
 for i, blob in enumerate(bloblist):
     print("Top words in document {}".format(i + 1))
     scores = {word: tfidf(word, blob, bloblist) for word in blob.words}
-    #l = []
-    #for i in scores:
-    #    if scores[i] < 0.001 :
-    #        l.append[i]
-    #for i in l:
-    #    del scores[i]
+    l = []
+    keys = scores.keys()
+    for i in keys:
+        if scores[i] < 0.0011 :
+            l.append(i)
+    for i in l:
+        del scores[i]
     sorted_words = sorted(scores.items(), key=lambda x: x[1], reverse=True)
-    for word, score in sorted_words[:5]:
-        print("\tWord: {}, TF-IDF: {}".format(word.encode(errors='ignore'), format(score, '.5f')))
+    score.append(scores)
 
+
+res = recommandation(score[0],score)
+print len(res)
+
+
+#for word, score in sorted_words:
+     #   print("\tWord: {}, TF-IDF: {}".format(word.encode(errors='ignore'), format(score, '.5f')))
+    
 
