@@ -7,6 +7,7 @@ import math
 #import tfidf
 import wikipedia
 from textblob import TextBlob as tb
+import Model as md
 
 def tf(word, blob):
     x = blob.words.count(word)
@@ -68,6 +69,7 @@ contents = [i.content for i in pages]
 
 bloblist = [tb(i) for i in contents]
 #bloblist=[]
+<<<<<<< HEAD
 
 def scalaire(x,y):
     sum = 0.0
@@ -103,6 +105,9 @@ def recommandation(x,l):
     return res
 
 score = []
+=======
+mod = md.Model()
+>>>>>>> aefc9212e66fb2ec304894dcc61437717ee56f5c
 for i, blob in enumerate(bloblist):
     print("Top words in document {}".format(i + 1))
     scores = {word: tfidf(word, blob, bloblist) for word in blob.words}
