@@ -22,7 +22,3 @@ class Model:
     def getArticlesTable(): # should never be used in real (purpose of test)
         return self.articles
                 
-
-
-
-
