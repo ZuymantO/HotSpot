@@ -8,6 +8,7 @@ import math
 import wikipedia
 from textblob import TextBlob as tb
 import Model as md
+from TfIdf import TfIdf as tf
 
 stop_words=["le","la","les","un","une","de","des","en","du","l'","mais","ou","et","donc","or","ni","car","ces","ce","sa","mon","ton","son","leur","leurs","je","tu","il","elle","on","nous","vous","ils","elles"
             ,"mes","tes","nos","vos",
@@ -76,7 +77,10 @@ contents = [i.content for i in pages]
 
 bloblist = [tb(i) for i in contents]
 #bloblist=[]
+<<<<<<< HEAD
 
+=======
+>>>>>>> 2809433c3dd993c83310f60f48c341736f115962
 
 def scalaire(x,y):
     sum = 0.0
@@ -114,6 +118,10 @@ def recommandation(x,l):
 score = []
 
 #mod = md.Model()
+<<<<<<< HEAD
+=======
+rf = tf(contents, [])
+>>>>>>> 2809433c3dd993c83310f60f48c341736f115962
 
 for i, blob in enumerate(bloblist):
     print("Top words in document {}".format(i + 1))
