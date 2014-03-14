@@ -42,5 +42,3 @@ class Article:
     def getResume():
         return self.resume
 
-
-
