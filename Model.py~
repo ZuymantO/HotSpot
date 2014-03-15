@@ -11,16 +11,9 @@ class Model:
         self.client = MongoClient(dbhost, dbport)
         self.db = self.client.HotSpot
         self.articles = self.db.articles
-
-    def exists(self, article):
-        return self.articles.find_one({"title":article.getTitle()}) == None
         
     def insert(self, article): # possibilite d'inserre plusieurs articles si article est une liste d article
-        truc = self.articles.find_one({"title":article.getTitle()}) 
-        if truc == None :
-            return self.articles.insert(article.__dict__) #return le object id de l'insertion
-        else:
-            return truc
+        return self.articles.insert(article.__dict__) #return le object id de l'insertion
 
     def getOneArticle(): # retourne un element article de la collection
         return self.articles.find_one()

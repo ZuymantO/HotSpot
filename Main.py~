@@ -11,7 +11,6 @@ import Model as md
 #from TfIdf import TfIdf as tf
 import Advise as ad
 import Article as art
-import bson
 
 stop_words=["le","la","les","un","une","de","des","en","du","l'","mais","ou","et","donc","or","ni","car","ces","ce","sa","mon","ton","son","leur","leurs","je","tu","il","elle","on","nous","vous","ils","elles"
             ,"mes","tes","nos","vos",

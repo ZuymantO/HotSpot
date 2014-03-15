@@ -60,10 +60,10 @@ class Advise:
         res = []
         for i in range(len(l)):
             cos = self.cosinus(x,l[i])
-            #if cos<0.5:
-            #    continue
-            #else:
-            res.append((l[i],cos))
+            if cos<0.5:
+                continue
+            else:
+                res.append((l[i],cos))
         res.sort(self.cmpval)
         return res
     

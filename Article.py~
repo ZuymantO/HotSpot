@@ -15,7 +15,7 @@ class Article:
         self.dislike    = False # permet de refuser un article recommandé par exemple
         self.keywords   = kw # les mots clés et le taux idf pour l'article
 
-    def getTitle(self):
+    def getTitle():
         return self.title
 
     def getKeywords():
@@ -27,7 +27,7 @@ class Article:
     def setFavoris(b):
         self.favoris = b
     
-    def setTitle(self, t):
+    def setTitle(t):
         self.title = t
 
     def setKeywords(s):
