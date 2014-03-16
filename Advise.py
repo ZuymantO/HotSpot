@@ -58,6 +58,7 @@ class Advise:
     
     def recommandation(self, x, l):
         res = []
+        
         for i in range(len(l)):
             cos = self.cosinus(x,l[i])
             #if cos<0.5:
