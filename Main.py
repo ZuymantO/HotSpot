@@ -8,7 +8,7 @@ import math
 import wikipedia
 from textblob import TextBlob as tb
 import Model as md
-#from TfIdf import TfIdf as tf
+import TfIdf as tf
 import Advise as ad
 import Article as art
 import bson
@@ -19,7 +19,7 @@ stop_words=["le","la","les","un","une","de","des","en","du","l'","mais","ou","et
             ,"Mes","Tes","Nos","Vos"]
 
 
-
+"""
 def tf(word, blob):
     if word in stop_words:
         return 0.0
@@ -48,7 +48,7 @@ def tfidf(word, blob, bloblist):
     #print x
     #print y
     return x*y
-
+"""
 wikipedia.set_lang("fr")
 """
 titles = wikipedia.random(pages=10)
@@ -126,7 +126,7 @@ def generate (n):
             page = wikipedia.WikipediaPage(title)
             summary = page.summary
             content = tb(page.content)
-            tff = {word: tf(word,content) for word in content.words}
+            tff = {word: tf.tf(word,content) for word in content.words}
             res = {}
             for i in tff:
                 if tff[i] == 0.0:
@@ -141,4 +141,38 @@ def generate (n):
         except bson.errors.InvalidDocument :
             generate(n)
 
-generate(1000)
+#generate(10)
+
+#def test(n):
+#    return mod.articles.find().limit(10)
+"""
+def propose(n):
+    
+
+propose(10)
+"""
+#res = test(10)
+#for i in res:
+#    print res["title"]
+
+adv = ad.Advise(None,mod)
+
+
+def testidf():
+    l = []
+    l1 = []
+    article = mod.getOneArticle()
+    articles = mod.articles.find()
+    x= article["keywords"]
+    for i in articles:
+        l.append(i["keywords"])
+    x1 = {word: tf.tfidf(word, x, l) for word in x.keys()}
+    for i in l:
+        l1.append({word: tf.tfidf(word, i, l) for word in i.keys()})
+    res = adv.recommandation(x1,l1)    
+    for (i,j) in res:
+        print j
+testidf()
+    
+
+    
