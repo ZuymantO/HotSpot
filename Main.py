@@ -4,7 +4,7 @@
 #import pymongo
 import string
 import math
-#import tfidf
+import time
 import wikipedia
 from textblob import TextBlob as tb
 import Model as md
@@ -161,16 +161,16 @@ adv = ad.Advise(None,mod)
 def testidf():
     l = []
     l1 = []
-    article = mod.getOneArticle()
+    article = mod.articles.find().skip(int((time.time() % mod.articles.count()))).next()
     articles = mod.articles.find()
-    x= article["keywords"]
+    x = article["keywords"]
     for i in articles:
         l.append(i["keywords"])
     x1 = {word: tf.tfidf(word, x, l) for word in x.keys()}
     for i in l:
         l1.append({word: tf.tfidf(word, i, l) for word in i.keys()})
     res = adv.recommandation(x1,l1)    
-    for (i,j) in res:
+    for (i, j) in res:
         print j
 testidf()
     
