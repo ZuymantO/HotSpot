@@ -34,7 +34,7 @@ def tf(word, blob):
     return x/(y*1.0)
 
 def n_containing(word, bloblist):
-    return sum(1 for blob in bloblist if word in blob.keys())
+    return sum(1 for blob in bloblist if word in blob[1].keys())
 
 def idf(word, bloblist):
     x = float(1 + len(bloblist) / (1 + n_containing(word, bloblist)))
