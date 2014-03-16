@@ -141,7 +141,7 @@ def generate (n):
         except bson.errors.InvalidDocument :
             generate(n)
 
-#generate(10)
+#generate(500)
 
 #def test(n):
 #    return mod.articles.find().limit(10)
@@ -158,21 +158,41 @@ propose(10)
 adv = ad.Advise(None,mod)
 
 
-def testidf():
+def main():
     l = []
     l1 = []
-    article = mod.getOneArticle()
+    #article = mod.getOneArticle()
+    articles = mod.articles.find()
+    
+    titles = []
+    #articles = mod.articles.find()
+    for i,v in enumerate(articles):
+        titles.append((i, v["title"]))
+    for (i,j) in titles:
+        print("{}: {}".format( i,j.encode(errors='replace')))
+    num = input('Enter a number\n')
+
+    titre = titles[num][1]
+    print titre
+
+    a = mod.articles.find({"title":titre})
+    article = a.next()
     articles = mod.articles.find()
     x= (article["title"],article["keywords"])
     for i in articles:
         l.append((i["title"],i["keywords"]))
+    
     x1 = (x[0],{word: tf.tfidf(word, x[1], l) for word in x[1].keys()})
     for i in l:
         l1.append((i[0],{word: tf.tfidf(word, i[1], l) for word in i[1].keys()}))
-    res = adv.recommandation(x1,l1)    
+    res =  adv.recommandation(x1,l1)    
+    print("Recommandations pour {}:\n".format(titre.encode(errors='replace')))
     for (i,j) in res:
-        print("{}: {}".format( i.encode(errors='ignore') ,j))
-testidf()
+        if j>0.5:
+            print("{}: {}".format( i.encode(errors='replace') ,j))
+        
+    
+main()
     
 
     
