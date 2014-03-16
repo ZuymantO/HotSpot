@@ -163,15 +163,15 @@ def testidf():
     l1 = []
     article = mod.getOneArticle()
     articles = mod.articles.find()
-    x= article["keywords"]
+    x= (article["title"],article["keywords"])
     for i in articles:
-        l.append(i["keywords"])
-    x1 = {word: tf.tfidf(word, x, l) for word in x.keys()}
+        l.append((i["title"],i["keywords"]))
+    x1 = (x[0],{word: tf.tfidf(word, x[1], l) for word in x[1].keys()})
     for i in l:
-        l1.append({word: tf.tfidf(word, i, l) for word in i.keys()})
+        l1.append((i[0],{word: tf.tfidf(word, i[1], l) for word in i[1].keys()}))
     res = adv.recommandation(x1,l1)    
     for (i,j) in res:
-        print j
+        print("{}: {}".format( i.encode(errors='ignore') ,j))
 testidf()
     
 
