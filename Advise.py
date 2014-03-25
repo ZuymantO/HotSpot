@@ -58,12 +58,13 @@ class Advise:
     
     def recommandation(self, x, l):
         res = []
+        
         for i in range(len(l)):
-            cos = self.cosinus(x,l[i])
+            cos = self.cosinus(x[1],l[i][1])
             #if cos<0.5:
             #    continue
             #else:
-            res.append((l[i],cos))
+            res.append((l[i][0],cos))
         res.sort(self.cmpval)
         return res
     

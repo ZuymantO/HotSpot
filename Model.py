@@ -22,7 +22,7 @@ class Model:
         else:
             return truc
 
-    def getOneArticle(): # retourne un element article de la collection
+    def getOneArticle(self): # retourne un element article de la collection
         return self.articles.find_one()
 
     def selectOneWith(obj): # retourne un element filtre part obj = {"champ" : valeur; etc...}

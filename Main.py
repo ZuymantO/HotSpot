@@ -4,11 +4,11 @@
 #import pymongo
 import string
 import math
-#import tfidf
+import time
 import wikipedia
 from textblob import TextBlob as tb
 import Model as md
-#from TfIdf import TfIdf as tf
+import TfIdf as tf
 import Advise as ad
 import Article as art
 import bson
@@ -19,7 +19,7 @@ stop_words=["le","la","les","un","une","de","des","en","du","l'","mais","ou","et
             ,"Mes","Tes","Nos","Vos"]
 
 
-
+"""
 def tf(word, blob):
     if word in stop_words:
         return 0.0
@@ -48,7 +48,7 @@ def tfidf(word, blob, bloblist):
     #print x
     #print y
     return x*y
-
+"""
 wikipedia.set_lang("fr")
 """
 titles = wikipedia.random(pages=10)
@@ -126,7 +126,7 @@ def generate (n):
             page = wikipedia.WikipediaPage(title)
             summary = page.summary
             content = tb(page.content)
-            tff = {word: tf(word,content) for word in content.words}
+            tff = {word: tf.tf(word,content) for word in content.words}
             res = {}
             for i in tff:
                 if tff[i] == 0.0:
@@ -141,4 +141,55 @@ def generate (n):
         except bson.errors.InvalidDocument :
             generate(n)
 
-generate(1000)
+#generate(500)
+
+#def test(n):
+#    return mod.articles.find().limit(10)
+"""
+def propose(n):
+    
+
+propose(10)
+"""
+#res = test(10)
+#for i in res:
+#    print res["title"]
+
+adv = ad.Advise(None,mod)
+
+
+def main():
+    l = []
+    l1 = []
+
+    '''    articles = mod.articles.find()
+    
+    titles = []
+    #articles = mod.articles.find()
+    for i,v in enumerate(articles):
+        titles.append((i, v["title"]))
+    for (i,j) in titles:
+        print("{}: {}".format( i,j.encode(errors='replace')))
+    num = input('Enter a number\n')
+    '''
+    article = mod.articles.find().skip(int((time.time() % mod.articles.count()))).next()
+    print article['title']
+
+    articles = mod.articles.find()
+    x = (article["title"], article["keywords"])
+
+    for i in articles:
+        l.append((i["title"], i["keywords"]))
+    
+    x1 = (x[0],{word: tf.tfidf(word, x[1], l) for word in x[1].keys()})
+    for i in l:
+        l1.append((i[0],{word: tf.tfidf(word, i[1], l) for word in i[1].keys()}))
+    res =  adv.recommandation(x1,l1)    
+    print("Recommandations pour {}:\n".format(article['title'].encode(errors='replace')))
+    for (i,j) in res:
+        if j > 0.5:
+            print("{}: {}".format( i.encode(errors='replace') ,j))
+        
+    
+main()
+

@@ -21,6 +21,7 @@ Les librairies suivantes sont supposées présentes sur la machine exécutant le
 -numpy
 -textblob va permettre de traiter des articles comme des objets binaires large mais à la manière des blobs manipulés dans les vision par ordinateur
 -sklearn (instalable avec pip en recherchant scikit-learn, ne pas confondre avec scikit-learns)
+-punkt (instalable grâce à la librairie "nltk" faire un nltk.download() et intaller punkt)
 
 la classe de Niniane Wang pour les calculs de Tf-idf (tfidf.py)*
 
