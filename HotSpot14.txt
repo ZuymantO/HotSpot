@@ -1,8 +1,0 @@
-#WP
-i46R2vCG6OwD
-
-
-$mysql_host = "mysql14.000webhost.com";
-$mysql_database = "a1925744_wordp";
-$mysql_user = "a1925744_wordp";
-$mysql_password = "wordp2014";
