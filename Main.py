@@ -248,8 +248,13 @@ def main():
     while 1:
         query = mod.articles.find({"like":True})
         articles = mod.articles.find({"like":False})
-        for i in query:
-            recommand(i, articles)
+        try:
+            for i in query:
+                print "Start recommandation for article "
+                print i["title"]
+                thread.start_new_thread(recommand, (i, articles))
+        except:
+            print "Error: unable to start thread"
 """
     l = []
     l1 = []
